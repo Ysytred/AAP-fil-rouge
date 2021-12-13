@@ -25,7 +25,6 @@ int main(ELT_STRING nom_fichier, int n) {
     fichier=fopen("nom_fichier","r");
     pmot=system(head -i | tail -1);
     insertAVL(&pmot, *pmot);
-    Balance
     
     
   }
