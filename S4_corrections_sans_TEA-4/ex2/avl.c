@@ -51,34 +51,26 @@ static T_avl newNodeAVL(T_elt e) {//idem fichier bst.c (cf ex1)
 
 int	insertAVL (T_avlNode ** pA, T_elt e) {
 //Attention j'ai remplacé pRoot par pA pour mieux coller au programme fourni sur le slide 90 du support de la séance 4
-	int deltaH;
+	int deltaH = 0;
 	// ordre de récurrence ? 
 	// cas de base ?
-	// cas général 
 	if (*pA == NULL)
 		*pA = newNodeAVL(e);
-		return 1;
-	if (eltcmp(e, (*pA)->val) <= 0){
-		if((*pA)->l == NULL)
-			(*pA)->l = newNodeAVL(e);
-		else{
-		deltaH = insertAVL((*pA)->l, e);//insertion dans le sous arbre gauche
+		deltaH = 0;
+	// cas général 
+	else if (e <= (*pA)->val){
+		deltaH = insertAVL(&(*pA)->l, e);//insertion dans le sous arbre gauche
 		(*pA)->bal += deltaH;
-		}
 	}
 	else{
-		if((*pA)->r == NULL)
-			(*pA)->r = newNodeAVL(e);
-		else{
-			deltaH = insertAVL((*pA)->r, e);//insertion dans le sous arbre droit
-			(*pA)->bal += -deltaH;//mise à jour du facteur d'équilibre
-		}
+		deltaH = insertAVL(&(*pA)->r, e);//insertion dans le sous arbre droit
+		(*pA)->bal += -deltaH;//mise à jour du facteur d'équilibre
+	}
 	if(deltaH == 0) return 0;
 	else *pA = balanceAVL(*pA);
 	
 	if((*pA)->bal != 0) return 1;
 	else return 0;
-	}
 	 
 }
 
