@@ -58,7 +58,7 @@ int	insertAVL (T_avlNode ** pA, T_elt e) {
 		*pA = newNodeAVL(e);
 		deltaH = 0;
 	// cas général 
-	else if (e <= (*pA)->val){
+	else if (eltcmp(e,(*pA)->val) <= 0){
 		deltaH = insertAVL(&(*pA)->l, e);//insertion dans le sous arbre gauche
 		(*pA)->bal += deltaH;
 	}
