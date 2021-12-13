@@ -133,6 +133,32 @@ static T_avlNode * balanceAVL(T_avlNode * A) {
 
 }
 
+void fusionner(T_elt t [], int d, int m, int f) {
+T_elt aux[f - d + 1];  
+int i, j, k;
+memcpy(aux, &t[d], (f - d + 1) * sizeof(T_elt));	// Copie des données à fusionner
+i = 0; j = m - d + 1; k = 0;
+while (i <= m - d && j <= f - d) {
+if (aux[i] <= aux[j]) 	t[d + k++] = aux[i++];	// aux[i] est plus petit : on le place dans t 
+else 		t[d + k++] = aux[j++];				// aux[j] est plus petit : on le place dans t 
+}
+for (; i <= m - d; t[d + k++] = aux[i++]); // le reste du tableau gauche
+for (; j <= f - d; t[d + k++] = aux[j++]); // le reste du tableau droit
+}
+
+
+void signature(T_elt t [], int debut, int fin) //cette fonction est un tri fusion, mais on s'en sert pour obtenir la signature d'un mot
+{
+int milieu;
+if (debut < fin)
+	{
+	milieu = (debut + fin)/2;
+	signature(t, debut, milieu);
+	signature(t, milieu + 1, fin);
+	fusionner(t, debut, milieu, fin);
+	}
+}
+
 // IDEM pour ABR 
 
 void printAVL(T_avl root, int indent) {
