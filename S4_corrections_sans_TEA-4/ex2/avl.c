@@ -40,6 +40,7 @@ static T_avl newNodeAVL(T_elt e) {//idem fichier bst.c (cf ex1)
 	T_avl root = (T_avlNode *) malloc(sizeof (T_avlNode)); 
 	CHECK_IF(root, NULL,"erreur malloc dans newNode");
 	root->val = eltdup(e); 
+	root->bal=0;
 	root->l = NULL; 
 	root->r = NULL; 
 	
