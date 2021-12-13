@@ -55,7 +55,7 @@ int	insertAVL (T_avlNode ** pA, T_elt e) {
 	// ordre de récurrence ? 
 	// cas de base ?
 	// cas général 
-	if (e <= (*pA)->val){
+	if (eltcmp(e, (*pA)->val) <= 0){
 		if((*pA)->l == NULL)
 			(*pA)->l = newNodeAVL(e);
 		else{
