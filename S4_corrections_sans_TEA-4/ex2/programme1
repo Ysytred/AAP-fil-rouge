@@ -17,17 +17,16 @@ int main(ELT_STRING nom_fichier, int n) {
 	CLRSCR();
 	WHOAMI(); 
   
-  int i;
+        int i;
   
-  for(i=0,i<n,i++){
-    ELT_STRING mot;
-    FILE* fichier=NULL;
-    fichier=fopen("nom_fichier","r");
-    pmot=system(head -i | tail -1);
-    insertAVL(&pmot, *pmot);
-    
-    
-  }
+	for(i=0,i<n,i++){
+		ELT_STRING mot;
+   		FILE* fichier=NULL;
+   		fichier=fopen("nom_fichier","r");
+    		pmot=system(fichier | head -i | tail -1);
+    		insertAVL(&pAux, *pmot);				
+    		createDotAvl(root,"root %d" i);
+  	}
 
 	return 0;
 }
