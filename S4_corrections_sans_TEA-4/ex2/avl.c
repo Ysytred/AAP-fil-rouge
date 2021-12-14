@@ -334,3 +334,16 @@ void createDotAVL(const T_avl root, const char *basename) {
     printf("Creation de '%s' et '%s' ... effectuee\n", fnameDot, fnamePng);
 }
 
+int tailleDesMots(NOM DU FICHIER){
+	int i;
+	int compt = 0;
+	while (  != '\n')
+		compt++;
+	return compt
+}
+	
+	
+	
+	
+	
+	
