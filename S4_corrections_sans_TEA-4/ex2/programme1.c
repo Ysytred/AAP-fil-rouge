@@ -37,7 +37,8 @@ int main() {
   size_t len = 0;
   ssize_t read;
 
-  fichier=fopen(nomfichier,"r");
+
+fichier=fopen(nomfichier,"r");
   if (fichier==NULL)
     exit(EXIT_FAILURE);
 
@@ -45,31 +46,9 @@ int main() {
     
     while (i<n){
       read=getline(&line, &len, fichier);
-      printf("Nombre de lettres : %zu \n", read-1);
-      printf("%s",line);
+    	insertAVL(&root,mot);				
+    	createDotAVL(root,"root");
       i++;
-    }
-
-  /*	
-      if (fichier != NULL)
-    {
-        printf("Bonjour");
-    }
-    else
-    {
-        // On affiche un message d'erreur si on veut
-        printf("Impossible d'ouvrir le fichier test.txt");
-    }
-
-  int i=0;
-	while(i<n){
-    		fgets(mot,30,nomfichier);
-        /*
-    		insertAVL(&pAux,mot);				
-    		createDotAVL(root,"root");
-
-        i++;
   	}
-  */
 	return 0;
 }
