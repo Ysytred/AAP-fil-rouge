@@ -12,9 +12,9 @@
 typedef enum {
     DOUBLE_RIGHT = -2,
     RIGHT = -1,
-    BALANCED = 0 ,
-    LEFT = 1,
-    DOUBLE_LEFT = -2,
+    BALANCED,
+    LEFT,
+    DOUBLE_LEFT
 } T_bal;
 
 typedef struct aNode{
