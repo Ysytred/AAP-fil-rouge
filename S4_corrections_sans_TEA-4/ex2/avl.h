@@ -27,7 +27,7 @@ typedef struct aNode{
 
 typedef struct nodeSign {
 	T_elt sign; //signature des mots dans le noeud
-	char *T_elt val; //liste des mots contenus dans le noeud 
+	T_elt * val; //liste des mots contenus dans le noeud 
 	T_bal bal; // facteur de déséquilibre
 	struct aNode *l; // pointeur vers sous-arbre gauche
 	struct aNode *r; // pointeur vers sous-arbre droit 
