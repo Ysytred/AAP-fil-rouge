@@ -125,31 +125,22 @@ static T_avlNode * balanceAVL(T_avlNode * A) {
 
 }
 
-void fusionner(T_elt t [], int d, int m, int f) {
-T_elt aux[f - d + 1];  
-int i, j, k;
-memcpy(aux, &t[d], (f - d + 1) * sizeof(T_elt));	// Copie des données à fusionner
-i = 0; j = m - d + 1; k = 0;
-while (i <= m - d && j <= f - d) {
-if (aux[i] <= aux[j]) 	t[d + k++] = aux[i++];	// aux[i] est plus petit : on le place dans t 
-else 		t[d + k++] = aux[j++];				// aux[j] est plus petit : on le place dans t 
-}
-for (; i <= m - d; t[d + k++] = aux[i++]); // le reste du tableau gauche
-for (; j <= f - d; t[d + k++] = aux[j++]); // le reste du tableau droit
-}
+/*
+void tri_iteratif(char *tableau[], int taille)
+ {
+   char *temp; 
+   int i, j;
 
-
-void signature(T_elt t [], int debut, int fin) //cette fonction est un tri fusion, mais on s'en sert pour obtenir la signature d'un mot
-{
-int milieu;
-if (debut < fin)
-	{
-	milieu = (debut + fin)/2;
-	signature(t, debut, milieu);
-	signature(t, milieu + 1, fin);
-	fusionner(t, debut, milieu, fin);
-	}
-}
+   for (i = 0; i < taille; i++) 
+    for (j = 0; j < taille; j++)
+      if (strcmp(tableau[i], tableau[j]) < 0)
+        {
+          temp = tableau[i];
+          tableau[i] = tableau[j];
+          tableau[j] = temp;
+        }
+  }
+*/
 
 // IDEM pour ABR 
 
@@ -335,23 +326,7 @@ void createDotAVL(const T_avl root, const char *basename) {
     printf("Creation de '%s' et '%s' ... effectuee\n", fnameDot, fnamePng);
 }
 
-int tailleDesMots(T_elt adresse_fichier, T_elt nom_fichier){
-	
-	int compt = 0;
-	
-	FILE* fichier=NULL;
-   	fichier=fopen("nom_fichier","r")
-		
-	while (  != '\n') 
-		compt++;
-	//dans les dictionnaires fournis, il y a un mot par ligne
-	//et tous les mots ont le meme nombre de lettres
-	//on compte le nombre de lettres sur la première ligne
-	return ('taille des mots', compt);
-}
-	
 
-int nbMots(){
 	
 	
 	
