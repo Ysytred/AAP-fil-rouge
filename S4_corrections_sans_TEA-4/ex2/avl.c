@@ -126,14 +126,14 @@ static T_avlNode * balanceAVL(T_avlNode * A) {
 }
 
 /*
-void tri_iteratif(char *tableau[], int taille)
+void tri_iteratif(char *tableau[])
  {
    char *temp; 
    int i, j;
-
+taille = ;
    for (i = 0; i < taille; i++) 
     for (j = 0; j < taille; j++)
-      if (strcmp(tableau[i], tableau[j]) < 0)
+      if (eltcmp(tableau[i], tableau[j]) < 0)
         {
           temp = tableau[i];
           tableau[i] = tableau[j];
