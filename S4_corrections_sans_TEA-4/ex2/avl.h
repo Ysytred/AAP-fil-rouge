@@ -24,6 +24,16 @@ typedef struct aNode{
 	struct aNode *r; // pointeur vers sous-arbre droit 
 } T_avlNode, *T_avl;
 
+
+typedef struct nodeSign {
+	T_elt sign; //signature des mots dans le noeud
+	char *T_elt val; //liste des mots contenus dans le noeud 
+	T_bal bal; // facteur de déséquilibre
+	struct aNode *l; // pointeur vers sous-arbre gauche
+	struct aNode *r; // pointeur vers sous-arbre droit 
+} T_avlNodeSign, *T_avlSign;
+	
+	
 extern char * outputPath;
 
 int	insertAVL (T_avlNode ** root, T_elt e);
@@ -34,6 +44,9 @@ T_avlNode * searchAVL_rec(T_avl root, T_elt e);
 T_avlNode * searchAVL_it(T_avl root, T_elt e);
 void fusionner(T_elt t [], int d, int m, int f);
 void signature(T_elt t [], int debut, int fin); 
+int tailleDesMots();
+int nbMots(T_elt adresse_fichier, T_elt nom_fichier)
+int hauteurMin(T_avl root)
 
 void createDotAVL(const T_avl root, const char *basename); 
 
