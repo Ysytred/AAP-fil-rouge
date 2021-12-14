@@ -335,30 +335,23 @@ void createDotAVL(const T_avl root, const char *basename) {
     printf("Creation de '%s' et '%s' ... effectuee\n", fnameDot, fnamePng);
 }
 
-int tailleDesMots(){
+int tailleDesMots(T_elt adresse_fichier, T_elt nom_fichier){
 	
-	ELT_STRING adresse_fichier, nom_fichier;
 	int compt = 0;
-	
-	printf("Quelle est l'adresse du fichier ?\n");
-	scanf("%s", &adresse_fichier);
-	
-	printf("Et son petit nom ?\n");
-	scanf("%s", &nom_fichier);
 	
 	FILE* fichier=NULL;
    	fichier=fopen("nom_fichier","r")
 		
 	while (  != '\n') 
 		compt++;
-	 //dans les dictionnaires fournis, il y a un mot par ligne
+	//dans les dictionnaires fournis, il y a un mot par ligne
 	//et tous les mots ont le meme nombre de lettres
 	//on compte le nombre de lettres sur la première ligne
 	return ('taille des mots', compt);
 }
 	
 
-int
+int nbMots(){
 	
 	
 	
