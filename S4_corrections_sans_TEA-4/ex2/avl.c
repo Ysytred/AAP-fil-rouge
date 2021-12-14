@@ -327,7 +327,42 @@ void createDotAVL(const T_avl root, const char *basename) {
 }
 
 
+/*
+
+T_avlNode * searchAVL_rec(T_avl root, T_elt e){
+	// recherche récursive
+
+	// ordre de récurrence : hauteur de l'arbre 	
+	int test; 
+	signatureE = signature(e);
+	// base 
+	if (root== NULL) return NULL; 
+	else {
+		test = eltcmp(sifnatureE,root->sign); 
+		if (test == 0) return root; // trouvé ! 
+		else if (test <= 0) return searchAVL_rec(root->l,e);
+		else return searchAVL_rec(root->r,e);
+	}
+}
+
+T_avlNode * searchAVL_it(T_avl root, T_elt e){
+	// recherche itérative
+
+	int test;
+	signatureE = signatureE;
 	
+	while(root!=NULL) {	
+		test = eltcmp(signatureE,root->sign);
+		if (test ==0) return root;
+		else if  (test <= 0) root = root->l; 
+		else root = root->r; 
+	}
+
+	// pas trouvé (ou vide)
+	return NULL;  
+}
+
+*/
 	
 	
 	
