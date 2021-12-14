@@ -362,6 +362,11 @@ T_avlNode * searchAVL_it(T_avl root, T_elt e){
 	return NULL;  
 }
 
+int hauteurMin(T_avl root)
+{
+return (ceil(log2(heightAVL(root)))-1)
+}
+
 */
 	
 	
