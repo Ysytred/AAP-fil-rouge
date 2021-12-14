@@ -45,8 +45,8 @@ T_avlNode * searchAVL_it(T_avl root, T_elt e);
 void fusionner(T_elt t [], int d, int m, int f);
 void signature(T_elt t [], int debut, int fin); 
 int tailleDesMots();
-int nbMots(T_elt adresse_fichier, T_elt nom_fichier)
-int hauteurMin(T_avl root)
+int nbMots(T_elt adresse_fichier, T_elt nom_fichier);
+int hauteurMin(T_avl root);
 
 void createDotAVL(const T_avl root, const char *basename); 
 
