@@ -300,7 +300,7 @@ void createDotAVL(const T_avl root, const char *basename) {
 	sprintf(fnameDot, "%s%s_v%02u.dot", DOSSIER_DOT, basename, noVersion);
 	sprintf(fnamePng, "%s%s_v%02u.png", DOSSIER_PNG, basename, noVersion);
 
-	CHECK_IF(fp = fopen(fnameDot, "w"), NULL, "erreur fopen dans saveDotBST"); 
+	CHECK_IF(fp = fopen(fnameDot, "w"), NULL, "erreur fopen dans saveDotAVL"); 
 	
 	noVersion ++;
     fprintf(fp, "digraph %s {\n", basename);
