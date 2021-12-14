@@ -8,23 +8,34 @@
 #include "elt.h"
 #include "avl.h"
 
-int main(ELT_STRING nom_fichier, int n) {
-	T_avl root = NULL; 
-	T_avlNode * pAux = NULL;
-
-	T_elt srch; 
+void main() {
 
 	CLRSCR();
 	WHOAMI(); 
   
+	T_avl root = NULL; 
+	T_avlNode * pAux = NULL;
+	ELT_STRING mot;
+	ELT_STRING adresse_fichier, nom_fichier;
+	int n=0;
+	
+	printf("choisir un nombre de mots à mettre dans l'arbre \n");
+	scanf("%d", &n);
+	
+	printf("Quelle est l'adresse du fichier ?\n");
+	scanf("%s", &adresse_fichier);
+	
+	printf("Et son petit nom ?\n");
+	scanf("%s", &nom_fichier);
+
+
         int i;
-  
+	
+  	FILE* fichier=NULL;
+   	fichier=fopen("nom_fichier","r");
 	for(i=0,i<n,i++){
-		ELT_STRING mot;
-   		FILE* fichier=NULL;
-   		fichier=fopen("nom_fichier","r");
-    		pmot=system(fichier | head -i | tail -1);
-    		insertAVL(&pAux, *pmot);				
+    		system( mot << fichier | head -i | tail -1);
+    		insertAVL(&root,mot);				
     		createDotAvl(root,"root %d" i);
   	}
 
