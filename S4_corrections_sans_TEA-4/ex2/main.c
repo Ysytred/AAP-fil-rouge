@@ -24,7 +24,7 @@ int main(int argc, char ** argv) {
 	
 	// 8, 11, 16, 5, 7, 14, 6, 1, 3, 10, 12,16
 	insertAVL(&root, 8);
-	/*insertAVL(&root, 11);
+	insertAVL(&root, 11);
 	insertAVL(&root, 16);
 	insertAVL(&root, 5);
 	insertAVL(&root, 7);
@@ -33,7 +33,7 @@ int main(int argc, char ** argv) {
 	insertAVL(&root, 1);
 	insertAVL(&root, 3);
 	insertAVL(&root, 10);
-	insertAVL(&root, 12);*/
+	insertAVL(&root, 12);
 
 	printAVL(root, 0); 
 
