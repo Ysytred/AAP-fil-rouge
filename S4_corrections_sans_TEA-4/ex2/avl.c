@@ -1,14 +1,13 @@
 #include <assert.h>
 #include <sys/stat.h>
 #include <string.h>
-#include stdio.h
 
 //#define CLEAR2CONTINUE
 #include "../include/traces.h" 
 
 //#define DEBUG
 #include "../include/check.h"
-
+#include <math.h>
 #include "elt.h" // T_elt 
 #include "avl.h" // prototypes 
 
@@ -41,16 +40,16 @@ static T_avl newNodeAVL(T_elt e) {//idem fichier bst.c (cf ex1)
 	T_avl root = (T_avlNode *) malloc(sizeof (T_avlNode)); 
 	CHECK_IF(root, NULL,"erreur malloc dans newNode");
 	root->val = eltdup(e); 
-	root->bal=0;
 	root->l = NULL; 
-	root->r = NULL; 
+	root->r = NULL;
+	root->bal = BALANCED;
 	
 	return root; 
 }
 
  
 
-int	insertAVL (T_avlNode ** pA, T_elt e) {
+/*int	insertAVL (T_avlNode ** pA, T_elt e) {
 //Attention j'ai remplacé pRoot par pA pour mieux coller au programme fourni sur le slide 90 du support de la séance 4
 	int deltaH = 0;
 	// ordre de récurrence ? 
@@ -58,44 +57,83 @@ int	insertAVL (T_avlNode ** pA, T_elt e) {
 	if (*pA == NULL)
 		*pA = newNodeAVL(e);
 	// cas général 
-	else if (eltcmp(e,(*pA)->val) <= 0){
+	else if (eltcmp(e,(*pA)->val) <= 0 ){
 		deltaH = insertAVL(&(*pA)->l, e);//insertion dans le sous arbre gauche
 		(*pA)->bal += deltaH;
+		printf("bal %d : %d\n", (*pA)->val, (*pA)->bal);
 	}
 	else{
 		deltaH = insertAVL(&(*pA)->r, e);//insertion dans le sous arbre droit
 		(*pA)->bal += -deltaH;//mise à jour du facteur d'équilibre
+		printf("bal %d : %d\n", (*pA)->val, (*pA)->bal);
 	}
 	if(deltaH == 0) return 0;
-	else *pA = balanceAVL(*pA);
-	
+	else {
+		*pA = balanceAVL(*pA);
+		printf("équilibrage");
+	}
 	if((*pA)->bal != 0) return 1;
 	else return 0;
 	 
+}*/
+
+int	insertAVL (T_avlNode ** pA, T_elt e) {
+//Attention j'ai remplacé pRoot par pA pour mieux coller au programme fourni sur le slide 90 du support de la séance 4
+	int deltaH = 0;
+	// ordre de récurrence ? 
+	// cas de base ?
+	if (*pA == NULL){
+		*pA = newNodeAVL(e);
+		return 1;
+	}
+	// cas général 
+	if (eltcmp(e,(*pA)->val) > 0)
+		deltaH = -insertAVL(&(*pA)->r,e);
+	else
+		deltaH = insertAVL(&(*pA)->l,e);
+
+	if(deltaH == 0) return 0;
+	(*pA)->bal += deltaH;
+	*pA = balanceAVL(*pA);
+	return (*pA)->bal == 0 ? 0 : 1;
 }
-
-
 
 
 static T_avlNode * rotateLeftAVL (T_avlNode * B) {
 	// rotation gauche
 	T_avlNode * A = NULL;
+	int a, b;
+	
+	if (B == NULL) return B;
 	A = B->r;
+	b = B->bal;
+	
+	if(A == NULL) return B;
+	a = A->bal;
 	B->r = A->l;
 	A->l = B;
-	B->bal = B->bal + 1 - ((A->bal <= 0) ? A->bal : 0);
-	A->bal = A->bal + 1 + ((B->bal >= 0) ? B->bal : 0);
+	/*B->bal = B->bal + 1 - ((A->bal <= 0) ? A->bal : 0);
+	A->bal = A->bal + 1 + ((B->bal >= 0) ? B->bal : 0);*/
+	B->bal = b + 1 + MAX2(0, -a);
+	A->bal = 1 + MAX2(B->bal, 0) + a;
 	return A; 
 }
 
 static T_avlNode * rotateRightAVL (T_avlNode * A) {
 	// rotation droite
 	T_avlNode * B = NULL;
+	int a,b ;
+
+	if (A == NULL) return A;
 	B = A->l;
-	A->l = B->r;
-	B->r = A;
-	A->bal = A->bal - 1 - ((B->bal >= 0) ? B->bal : 0);
-	B->bal = B->bal - 1 + ((A->bal <= 0) ? A->bal : 0);
+  	a = A->bal;
+
+	if (B == NULL) return A;
+	b = B->bal;
+  	A->l = B->r;
+ 	B->r = A;
+	A->bal = a - 1 - MAX2(b, 0);
+	B->bal = b - 1 - MAX2(0, -A->bal);
 	return B; 
 
 }
@@ -103,44 +141,30 @@ static T_avlNode * rotateRightAVL (T_avlNode * A) {
 
 static T_avlNode * balanceAVL(T_avlNode * A) {
 	// rééquilibrage de A
+	if (A == NULL) return A;
 	if (A->bal > 1){//L'arbre penche à gauche
-		if((A->l)->bal == -1){
+		if (A->l == NULL) printf("pas possible!\n");
+		if((A->l)->bal < 0){
 		//Le fils gauche à une branche à droite -> il faut faire rotation gauche puis droite
 			A->l = rotateLeftAVL(A->l);
-			return rotateRightAVL(A);
+			A = rotateRightAVL(A);
 		}
 		else//Le fils gauche à une branche à gauche -> rotation simple droite
-			return rotateRightAVL(A);
+			A = rotateRightAVL(A);
 		}//fin du cas l'arbe penche à gauche
-	else if (A->bal < -1){//L'arbre penche à droite
-		if((A->r)->bal == 1){
+	 	if (A->bal <= -2){//L'arbre penche à droite
+		if(A->r == NULL) printf("pas possible!");
+		if((A->r)->bal > 0){
 			//Le fils droit à une branche à gauche -> il faut faire rotation droite puis gauche
 			A->r = rotateRightAVL(A->r);
-			return rotateLeftAVL(A);
+			A = rotateLeftAVL(A);
 		}
 		else//Le fils droit à une branche à droite -> rotation simple gauche
-			return rotateLeftAVL(A);
-		}//fin du ca l'arbre penche à droite
-	return NULL; 
+			A = rotateLeftAVL(A);
+		}//fin du cas l'arbre penche à droite
+	return A; 
 
 }
-
-/*
-void tri_iteratif(char *tableau[])
- {
-   char *temp; 
-   int i, j;
-taille = ;
-   for (i = 0; i < taille; i++) 
-    for (j = 0; j < taille; j++)
-      if (eltcmp(tableau[i], tableau[j]) < 0)
-        {
-          temp = tableau[i];
-          tableau[i] = tableau[j];
-          tableau[j] = temp;
-        }
-  }
-*/
 
 // IDEM pour ABR 
 
@@ -291,7 +315,7 @@ void createDotAVL(const T_avl root, const char *basename) {
 	sprintf(fnameDot, "%s%s_v%02u.dot", DOSSIER_DOT, basename, noVersion);
 	sprintf(fnamePng, "%s%s_v%02u.png", DOSSIER_PNG, basename, noVersion);
 
-	CHECK_IF(fp = fopen(fnameDot, "w"), NULL, "erreur fopen dans saveDotAVL"); 
+	CHECK_IF(fp = fopen(fnameDot, "w"), NULL, "erreur fopen dans saveDotBST"); 
 	
 	noVersion ++;
     fprintf(fp, "digraph %s {\n", basename);
@@ -325,49 +349,3 @@ void createDotAVL(const T_avl root, const char *basename) {
 
     printf("Creation de '%s' et '%s' ... effectuee\n", fnameDot, fnamePng);
 }
-
-
-/*
-
-T_avlNode * searchAVL_rec(T_avl root, T_elt e){
-	// recherche récursive
-
-	// ordre de récurrence : hauteur de l'arbre 	
-	int test; 
-	signatureE = signature(e);
-	// base 
-	if (root== NULL) return NULL; 
-	else {
-		test = eltcmp(sifnatureE,root->sign); 
-		if (test == 0) return root; // trouvé ! 
-		else if (test <= 0) return searchAVL_rec(root->l,e);
-		else return searchAVL_rec(root->r,e);
-	}
-}
-
-T_avlNode * searchAVL_it(T_avl root, T_elt e){
-	// recherche itérative
-
-	int test;
-	signatureE = signatureE;
-	
-	while(root!=NULL) {	
-		test = eltcmp(signatureE,root->sign);
-		if (test ==0) return root;
-		else if  (test <= 0) root = root->l; 
-		else root = root->r; 
-	}
-
-	// pas trouvé (ou vide)
-	return NULL;  
-}
-
-int hauteurMin(T_avl root)
-{
-return (ceil(log2(heightAVL(root)))-1)
-}
-
-*/
-	
-	
-	
