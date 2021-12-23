@@ -35,7 +35,7 @@ int main() {
   FILE* fichier=NULL;
   char * line = NULL;
   size_t len = 0;
-  ssize_t read;//Pourquoi il y a 2 s à ssize ?
+  ssize_t read;
 
 
 fichier=fopen(nomfichier,"r");
