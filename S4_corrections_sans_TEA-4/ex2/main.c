@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
+#include <time.h>
 
 //#define CLEAR2CONTINUE
 #include "../include/traces.h" 
@@ -9,6 +10,7 @@
 #include "avl.h"
 
 int main(int argc, char ** argv) {
+	clock_t begin = clock();
 	T_avl root = NULL; 
 	T_avlNode * pAux = NULL;
 
@@ -50,6 +52,10 @@ int main(int argc, char ** argv) {
 	createDotAVL(root, "root");
 
 	return 0;*/
+	
+	clock_t end = clock();
+   	unsigned long millis = (end -  begin) * 1000 / CLOCKS_PER_SEC;
+   	printf( "Finished in %ld ms\n", millis ); 
 }
 
 
