@@ -361,15 +361,16 @@ int tailleDesMots(fichier)
 }
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+int nombreDeMots(fichier)
+{
+	int c;
+	int nLignes = 0;
+	while((c=fgetc(fichier)) != EOF)
+	{
+		if(c=='\n')
+			nLignes++;
+	}
+	return nLignes;
+}
 	
 	
