@@ -351,9 +351,8 @@ void createDotAVL(const T_avl root, const char *basename) {
 }
 
 
-int tailleDesMots(fichier)
+int tailleDesMots(FILE * fichier)
 {
-	FILE* fichier;
 	char line[30];
 	size_t read; 
 	read = fgets(line, 30, fichier);
@@ -361,16 +360,38 @@ int tailleDesMots(fichier)
 }
 	
 	
-int nombreDeMots(fichier)
+int nombreDeMots(FILE * fichier)
 {
 	int c;
 	int nLignes = 0;
 	while((c=fgetc(fichier)) != EOF)
-	{
+	{	struct aNode *l; // pointeur vers sous-arbre gauche
 		if(c=='\n')
 			nLignes++;
 	}
 	return nLignes;
 }
+
+int hauteurMin(T_avl root)
+{
+	return (ceil(log2(nbNodesAVL(root)))-1);
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
