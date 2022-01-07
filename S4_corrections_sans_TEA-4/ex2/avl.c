@@ -351,6 +351,25 @@ void createDotAVL(const T_avl root, const char *basename) {
 }
 
 
-int tailleDesMots()
+int tailleDesMots(fichier)
 {
+	FILE* fichier;
+	char line[30];
+	size_t read; 
+	read = fgets(line, 30, fichier);
+	return sizeof(read);
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
