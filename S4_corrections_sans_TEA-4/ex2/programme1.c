@@ -52,3 +52,57 @@ fichier=fopen(nomfichier,"r");
   	}
 	return 0;
 }
+
+#include <stdio.h>
+#include <assert.h>
+
+//#define CLEAR2CONTINUE
+#include "../include/traces.h" 
+
+// C'est dans le fichier elt.h qu'on doit choisir l'implémentation des T_elt
+#include "elt.h"
+#include "avl.h"
+
+int main(int argc, char * argv[]) {
+	T_avl root = NULL; 
+	T_avlNode * pAux = NULL;
+
+	T_elt srch; 
+
+	CLRSCR();
+	WHOAMI(); 
+
+	/////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////
+
+  outputPath = "ex2/output";
+
+  FILE* fichier;
+  char line[30];
+  size_t read;
+
+  fichier=fopen(argv[1],"r");
+  if (fichier==NULL)
+      exit(EXIT_FAILURE);
+
+  int n=atoi(argv[2]);
+  int i=0;
+
+  printf("ps de segmentation, n vaut %d", n);
+  getchar();
+
+  while (i<n){
+    read=fgets(line, 30, fichier);
+
+     printf("ps de segmentation 2");
+     puts(read);
+  getchar();
+
+   	insertAVL(&root,read);	
+     printf("ps de segmentation 2");
+     getchar();
+    createDotBST(root,"root");
+     i++;
+ 	}
+	return 0;
+}
