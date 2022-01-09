@@ -28,7 +28,7 @@ int main() {
 	printf("choisir un nombre de mots à mettre dans l'arbre \n");
 	scanf("%d", &n);
 
-  printf("Et son petit nom ?\n");
+  printf("Et son nom ?\n");
   scanf("%s",nomfichier);
 
 
