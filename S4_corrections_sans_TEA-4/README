@@ -1,3 +1,23 @@
-AAP 2020 - Projet "Séance 4"
-
 Pour initialiser le dépôt, exécutez la commande <source setup_env.sh> depuis le shell
+
+Fil Rouge AAP - janvier 2022
+
+
+      Auteurs des programmes (groupe J)
+ 
+ Lucas Saland
+ Florent Marc
+ Paul Cazaux
+ Camille Meunier
+ 
+ 
+      Présentation du travail demandé
+ 
+Le fil rouge 2021-2022 porte sur les arbres AVL. Il s'agit d'un arbre dont la différence de hauteur du sous-arbre gauche et du sous-arbre droit de la racine ne peut excéder 1 en valeur absolue, et ce pour chaque sous-arbre de manière récursive. Pour ce faire, on introduit un facteur de déséquilibre.
+ 
+Le sujet est constitué de 10 fonctions à développer : création d’un arbre AVL, rotation simple à droite et à gauche, équilibrage, insertion et rééquilibrage, affichage de l’arbre, hauteur, nombre de nœuds, recherche récursive, et enfin recherche itérative.
+ 
+Il s’agit de constituer 3 principaux programmes à partir de ces 10 fonctions.
+Le premier est chargé d’afficher graphiquement les étapes de construction d’un arbre AVL contenant les « n » premiers mots d’un fichier (dont le chemin est fourni en ligne de commande). 
+Le deuxième permet d’indexer les mots d’un dictionnaire dans un arbre équilibré, en utilisant la signature des mots, c’est-à-dire une chaîne de caractères contenant les caractères du mot triés par ordre alphabétique croissant. L’utilisateur peut ensuite saisir un mot à rechercher dans l’arbre.
+Le troisième programme permet quant à lui de rechercher toutes les anagrammes présentes dans un dictionnaire fourni.
