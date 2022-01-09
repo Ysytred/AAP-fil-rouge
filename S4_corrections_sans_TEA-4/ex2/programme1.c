@@ -8,101 +8,53 @@
 #include "elt.h"
 #include "avl.h"
 
-T_elt mot;
-T_elt nom_fichier;
+#define MAX_WORD_SIZE 100
 
-int main() {
-
-	CLRSCR();
-
-  outputPath = "ex2/output";
-
-
+int main(int argc, char ** argv) {
 	T_avl root = NULL; 
 	T_avlNode * pAux = NULL;
+	int n;
+	int i = 0;
+	int k;
+	char * fichier = argv[1];// argument à rentrer en ligne de commande pour indiquer quels fichier utiliser pour les prénoms
+	FILE *fp = NULL;
+	char str[MAX_WORD_SIZE];
 	
-	int n=0;
-  char mot[30];
-  char nomfichier[40];
 	
-	printf("choisir un nombre de mots à mettre dans l'arbre \n");
-	scanf("%d", &n);
-
-  printf("Et son nom ?\n");
-  scanf("%s",nomfichier);
-
-
-  FILE* fichier=NULL;
-  char * line = NULL;
-  size_t len = 0;
-  ssize_t read;
-
-
-fichier=fopen(nomfichier,"r");
-  if (fichier==NULL)
-    exit(EXIT_FAILURE);
-
-  int i=0;
-    
-    while (i<n){
-      read=getline(&line, &len, fichier);
-    	insertAVL(&root,mot);				
-    	createDotAVL(root,"root");
-      i++;
-  	}
-	return 0;
-}
-
-#include <stdio.h>
-#include <assert.h>
-
-//#define CLEAR2CONTINUE
-#include "../include/traces.h" 
-
-// C'est dans le fichier elt.h qu'on doit choisir l'implémentation des T_elt
-#include "elt.h"
-#include "avl.h"
-
-int main(int argc, char * argv[]) {
-	T_avl root = NULL; 
-	T_avlNode * pAux = NULL;
-
-	T_elt srch; 
-
+	printf("Nombre de mots : ");
+	scanf("%d",&n);//nombre de mots
+	printf("\n");
+	
+	T_elt tab[n];//tab est un tableau de chaînes de caractères lorsque T_elt est définit comme chaîne de caractère
+	
 	CLRSCR();
 	WHOAMI(); 
-
 	/////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////
 
-  outputPath = "ex2/output";
+	
+ outputPath = "programme1/output";
 
-  FILE* fichier;
-  char line[30];
-  size_t read;
+	fp = fopen(fichier,"r");
+	if(fp == NULL){
+		printf("erreur fopen\n");
+		return 1;
+	}
+	while(i < n){
+	
+		insertAVL(&root, fgets(str, MAX_WORD_SIZE, fp));
+		printf("#-------------------------------------------------------------#\n");
+		printf("i = %d\n", i);
+		i++;
+		printAVL(root, 0);
+	}
+	
 
-  fichier=fopen(argv[1],"r");
-  if (fichier==NULL)
-      exit(EXIT_FAILURE);
+	fclose(fp);	
+	
+	//createDotAVL(root, "root"); //Problème de création du répertoire output
 
-  int n=atoi(argv[2]);
-  int i=0;
-
-  printf("ps de segmentation, n vaut %d", n);
-  getchar();
-
-  while (i<n){
-    read=fgets(line, 30, fichier);
-
-     printf("ps de segmentation 2");
-     puts(read);
-  getchar();
-
-   	insertAVL(&root,read);	
-     printf("ps de segmentation 2");
-     getchar();
-    createDotBST(root,"root");
-     i++;
- 	}
 	return 0;
 }
+
+
