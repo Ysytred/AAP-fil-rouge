@@ -16,7 +16,7 @@ int main(int argc, char ** argv) {
 	int n;
 	int i = 0;
 	int k;
-	char * fichier = argv[1];// argument à rentrer en ligne de commande pour indiquer quels fichier utiliser pour les prénoms
+	char * fichier = argv[1];// argument à rentrer en ligne de commande pour indiquer quel fichier utiliser pour les prénoms
 	FILE *fp = NULL;
 	char str[MAX_WORD_SIZE];
 	
