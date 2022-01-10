@@ -77,12 +77,9 @@ int main(int argc, char * argv[]) {
 
 	CLRSCR();
 	WHOAMI(); 
-
 	/////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////
-
  	 outputPath = "ex2/output";
-
  	 FILE* fichier;
 	 char line[30];
  	 size_t read;
@@ -98,7 +95,6 @@ int main(int argc, char * argv[]) {
 	ana=anagramme(root);	//liste des anagrammes
 	taille_de_liste(ana);	//taille de la liste des anagrammes
 	prtinf_decroissant(ana);	//affichage des anagrammes
-	
 	return 0;
 }
 
