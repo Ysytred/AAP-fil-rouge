@@ -59,6 +59,51 @@ int main(int argc, char ** argv) {
 }
 
 
+#include <stdio.h>
+#include <assert.h>
+
+//#define CLEAR2CONTINUE
+#include "../include/traces.h" 
+
+// C'est dans le fichier elt.h qu'on doit choisir l'implémentation des T_elt
+#include "elt.h"
+#include "avl.h"
+
+int main(int argc, char * argv[]) {
+	T_avl root = NULL; 
+	T_avlNodeSign * pAux = NULL;
+	T_elt srch; 
+	T_list ana;
+
+	CLRSCR();
+	WHOAMI(); 
+
+	/////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////
+
+ 	 outputPath = "ex2/output";
+
+ 	 FILE* fichier;
+	 char line[30];
+ 	 size_t read;
+
+ 	 fichier=fopen(argv[1],"r");
+ 	 if (fichier==NULL)
+   	 exit(EXIT_FAILURE);
+
+	  while (i<n){
+	 	  read=fgets(line, 30, fichier);
+		  insertAVLSign(&root,read);	
+ 	}
+	ana=anagramme(root);	//liste des anagrammes
+	taille_de_liste(ana);	//taille de la liste des anagrammes
+	prtinf_decroissant(ana);	//affichage des anagrammes
+	
+	return 0;
+}
+
+
+
 
 
 
