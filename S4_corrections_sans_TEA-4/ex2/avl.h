@@ -25,12 +25,17 @@ typedef struct aNode{
 } T_avlNode, *T_avl;
 
 
+typedef struct list {
+	T_elt val; 
+	struct liste *pnxt; 
+} T_list, *T_List;
+
 typedef struct nodeSign {
-	T_elt sign; //signature des mots dans le noeud
-	T_elt * val; //liste des mots contenus dans le noeud 
-	T_bal bal; // facteur de déséquilibre
-	struct nodeSign *l; // pointeur vers sous-arbre gauche
-	struct nodeSign *r; // pointeur vers sous-arbre droit 
+	T_elt sign;
+	struct liste *val; 
+	T_bal bal; 
+	struct nodeSign *l; 
+	struct nodeSign *r;  
 } T_avlNodeSign, *T_avlSign;
 	
 	
